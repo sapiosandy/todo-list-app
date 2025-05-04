@@ -32,7 +32,7 @@ final class TaskStore {
             .first!
         // Putting it all together, docs becomes a non-optional URL that points to your app’s Documents directory on disk. You then use this to build the full path to tasks.json, like:
         fileURL = docs.appendingPathComponent("tasks.json") // so you know exactly where to load and save your task data.
-        // call load() // Loads any previously saved tasks into memory when TaskStore is first created. 
+        // call load() // Loads any previously saved tasks into memory when TaskStore is first created.
         load()
     }
     

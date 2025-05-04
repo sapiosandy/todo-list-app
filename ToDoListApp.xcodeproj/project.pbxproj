@@ -6,8 +6,19 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		AFADD8302DC6E14F00B4B913 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AFADD7F02DC264A800B4B913 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AFADD7F72DC264A800B4B913;
+			remoteInfo = ToDoListApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		AFADD7F82DC264A800B4B913 /* ToDoListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AFADD82A2DC6E14F00B4B913 /* ToDoListAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoListAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -29,10 +40,22 @@
 			path = ToDoListApp;
 			sourceTree = "<group>";
 		};
+		AFADD82B2DC6E14F00B4B913 /* ToDoListAppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ToDoListAppTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		AFADD7F52DC264A800B4B913 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFADD8272DC6E14F00B4B913 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -46,6 +69,7 @@
 			isa = PBXGroup;
 			children = (
 				AFADD7FA2DC264A800B4B913 /* ToDoListApp */,
+				AFADD82B2DC6E14F00B4B913 /* ToDoListAppTests */,
 				AFADD7F92DC264A800B4B913 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -54,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				AFADD7F82DC264A800B4B913 /* ToDoListApp.app */,
+				AFADD82A2DC6E14F00B4B913 /* ToDoListAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -83,6 +108,29 @@
 			productReference = AFADD7F82DC264A800B4B913 /* ToDoListApp.app */;
 			productType = "com.apple.product-type.application";
 		};
+		AFADD8292DC6E14F00B4B913 /* ToDoListAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AFADD8322DC6E14F00B4B913 /* Build configuration list for PBXNativeTarget "ToDoListAppTests" */;
+			buildPhases = (
+				AFADD8262DC6E14F00B4B913 /* Sources */,
+				AFADD8272DC6E14F00B4B913 /* Frameworks */,
+				AFADD8282DC6E14F00B4B913 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AFADD8312DC6E14F00B4B913 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				AFADD82B2DC6E14F00B4B913 /* ToDoListAppTests */,
+			);
+			name = ToDoListAppTests;
+			packageProductDependencies = (
+			);
+			productName = ToDoListAppTests;
+			productReference = AFADD82A2DC6E14F00B4B913 /* ToDoListAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -95,6 +143,10 @@
 				TargetAttributes = {
 					AFADD7F72DC264A800B4B913 = {
 						CreatedOnToolsVersion = 16.3;
+					};
+					AFADD8292DC6E14F00B4B913 = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = AFADD7F72DC264A800B4B913;
 					};
 				};
 			};
@@ -113,12 +165,20 @@
 			projectRoot = "";
 			targets = (
 				AFADD7F72DC264A800B4B913 /* ToDoListApp */,
+				AFADD8292DC6E14F00B4B913 /* ToDoListAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		AFADD7F62DC264A800B4B913 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AFADD8282DC6E14F00B4B913 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -135,7 +195,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AFADD8262DC6E14F00B4B913 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AFADD8312DC6E14F00B4B913 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AFADD7F72DC264A800B4B913 /* ToDoListApp */;
+			targetProxy = AFADD8302DC6E14F00B4B913 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		AFADD80C2DC264AA00B4B913 /* Debug */ = {
@@ -315,6 +390,40 @@
 			};
 			name = Release;
 		};
+		AFADD8332DC6E14F00B4B913 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2UYY48S9AB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ToDoListAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ToDoListApp;
+			};
+			name = Debug;
+		};
+		AFADD8342DC6E14F00B4B913 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2UYY48S9AB;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.ToDoListAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = ToDoListApp;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -332,6 +441,15 @@
 			buildConfigurations = (
 				AFADD80C2DC264AA00B4B913 /* Debug */,
 				AFADD80D2DC264AA00B4B913 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AFADD8322DC6E14F00B4B913 /* Build configuration list for PBXNativeTarget "ToDoListAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AFADD8332DC6E14F00B4B913 /* Debug */,
+				AFADD8342DC6E14F00B4B913 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
