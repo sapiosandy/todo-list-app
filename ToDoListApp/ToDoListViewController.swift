@@ -17,10 +17,7 @@ class ToDoListViewController: UITableViewController {
         super.viewDidLoad()
         title = "To-Do"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        navigationItem.rightBarButtonItem =
-            UIBarButtonItem(barButtonSystemItem: .add,
-                            target: self,
-                            action: #selector(addTask))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTask))
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -31,17 +28,12 @@ class ToDoListViewController: UITableViewController {
     // MARK: – Add Task
 
     @objc private func addTask() {
-        let alert = UIAlertController(title: "New Task",
-                                      message: nil,
-                                      preferredStyle: .alert)
+        let alert = UIAlertController(title: "New Task", message: nil,preferredStyle: .alert)
         alert.addTextField { tf in tf.placeholder = "Enter task" }
-        alert.addAction(
-          UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         )
-        alert.addAction(
-          UIAlertAction(title: "Add", style: .default) { _ in
-            guard let text = alert.textFields?.first?.text,
-                  !text.isEmpty else { return }
+        alert.addAction(UIAlertAction(title: "Add", style: .default) { _ in
+            guard let text = alert.textFields?.first?.text,!text.isEmpty else { return }
             let task = Task(title: text)
             self.store.add(task)
             self.tableView.reloadData()
@@ -52,16 +44,12 @@ class ToDoListViewController: UITableViewController {
 
     // MARK: – Table Data Source
 
-    override func tableView(_ tableView: UITableView,
-                            numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView,numberOfRowsInSection section: Int) -> Int {
         return store.tasks.count
     }
 
-    override func tableView(_ tableView: UITableView,
-                            cellForRowAt indexPath: IndexPath)
-                            -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell",
-                                                 for: indexPath)
+    override func tableView(_ tableView: UITableView,cellForRowAt indexPath: IndexPath)-> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell",for: indexPath)
         let task = store.tasks[indexPath.row]
         cell.textLabel?.text = task.title
         cell.accessoryType = task.isCompleted ? .checkmark : .none
@@ -70,8 +58,7 @@ class ToDoListViewController: UITableViewController {
 
     // MARK: – Table Delegate
 
-    override func tableView(_ tableView: UITableView,
-                            didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView,didSelectRowAt indexPath: IndexPath) {
         let task = store.tasks[indexPath.row]
         store.toggleCompletion(of: task)
         tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -79,9 +66,7 @@ class ToDoListViewController: UITableViewController {
 
     // MARK: – Swipe Actions (Delete + Edit)
 
-    override func tableView(_ tableView: UITableView,
-                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath
-    ) -> UISwipeActionsConfiguration? {
+    override func tableView(_ tableView: UITableView,trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // 1️⃣ Delete action
         let delete = UIContextualAction(style: .destructive, title: "Remove") { _, _, completion in
             self.store.delete(at: IndexSet(integer: indexPath.row))
@@ -92,17 +77,11 @@ class ToDoListViewController: UITableViewController {
         // 2️⃣ Edit action
         let edit = UIContextualAction(style: .normal, title: "Edit") { _, _, completion in
             let task = self.store.tasks[indexPath.row]
-            let alert = UIAlertController(title: "Edit Task",
-                                          message: nil,
-                                          preferredStyle: .alert)
+            let alert = UIAlertController(title: "Edit Task",message: nil,preferredStyle: .alert)
             alert.addTextField { tf in tf.text = task.title }
-            alert.addAction(
-              UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            )
-            alert.addAction(
-              UIAlertAction(title: "Save", style: .default) { _ in
-                guard let newText = alert.textFields?.first?.text,
-                      !newText.isEmpty else { return }
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: "Save", style: .default) { _ in
+                guard let newText = alert.textFields?.first?.text, !newText.isEmpty else { return }
                 self.store.update(task, newTitle: newText)
                 tableView.reloadRows(at: [indexPath], with: .automatic)
               }

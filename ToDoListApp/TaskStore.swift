@@ -14,10 +14,9 @@ final class TaskStore {
     // static let shared creates a single global instance of TaskStore you can use anywhere in your app. (TaskStore.shared). This is called the singleton pattern
     static let shared = TaskStore()
     // A private variable that will hold the location (path) of the tasks.json file on your device.
-    private let fileURL: URL
-    // tasks is your in-memory list of all Task items.
-    // private(set) means other parts of your code can read tasks but only TaskStore itself can change it.
-    private(set) var tasks: [Task] = []
+    let fileURL: URL
+   
+    var tasks: [Task] = []
     
     
     // This initializer is marked private so nobody else can create another TaskStore - they must use shared.
@@ -47,9 +46,16 @@ final class TaskStore {
     }
     
     func add(_ task: Task) {
-        tasks.append(task)
+        let trimmedTitle = task.title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedTitle.isEmpty else { return }
+
+        // Prevent duplicates (case-insensitive)
+        guard !tasks.contains(where: { $0.title.lowercased() == trimmedTitle.lowercased() }) else { return }
+
+        tasks.append(Task(title: trimmedTitle))
         save()
     }
+
     
     func toggleCompletion(of task: Task) {
         guard let i = tasks.firstIndex(where: { $0.id == task.id}) else {return}

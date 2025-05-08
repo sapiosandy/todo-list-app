@@ -6,6 +6,7 @@
 //
 
 import XCTest
+@testable import ToDoListApp
 
 final class ToDoListAppTests: XCTestCase {
 
@@ -38,4 +39,53 @@ final class ToDoListAppTests: XCTestCase {
             XCUIApplication().launch()
         }
     }
+    
+    func testAddingTaskIncreasesCount() {
+        // Arrange: Start with a clean slate
+        let store = TaskStore.shared
+        store.tasks = []
+        
+        // Act: add one task
+        store.add(Task(title: "Buy milk"))
+        
+        // Assert: count should now be 1
+                XCTAssertEqual(store.tasks.count,1, "Adding a task should increase task.count to 1")
+    }
+    
+    func testAddingEmptyTitleDoesNotIncreaseCount() {
+        // Arrange
+        let store = TaskStore.shared
+        store.tasks = []
+        
+        //Act
+        store.add(Task(title: "")) // empty string
+        store.add(Task(title: "     ")) // spaces only
+        
+        // Assert
+        XCTAssertEqual(store.tasks.count,0, "Tasks with empty or whitespace-only titles should not be added")
+    }
+    
+    func testAddingDuplicateTaskDoesNotIncreaseCount() {
+        let store = TaskStore.shared
+        store.tasks = []
+
+        let task = Task(title: "Buy milk")
+        
+        store.add(task)
+        store.add(task) // duplicate title
+
+        XCTAssertEqual(store.tasks.count, 1, "Duplicate tasks should not be added if the title already exists")
+    }
+    
+    func testCaseInsensitiveDuplicateIsNotAdded() {
+        let store = TaskStore.shared
+        store.tasks = []
+
+        store.add(Task(title: "Buy milk"))
+        store.add(Task(title: "buy milk")) // same title, different case
+
+        XCTAssertEqual(store.tasks.count, 1, "Task titles should be treated as duplicates regardless of case")
+    }
+
 }
+

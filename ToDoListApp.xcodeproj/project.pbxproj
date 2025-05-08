@@ -17,11 +17,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AF0AAFDE2DCA78F100896E51 /* ToDoListApp.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = ToDoListApp.xctestplan; sourceTree = "<group>"; };
 		AFADD7F82DC264A800B4B913 /* ToDoListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ToDoListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFADD82A2DC6E14F00B4B913 /* ToDoListAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDoListAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		AF4DD61C2DCBE59B0032269B /* Exceptions for "ToDoListApp" folder in "ToDoListAppTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Task.swift,
+				TaskStore.swift,
+			);
+			target = AFADD8292DC6E14F00B4B913 /* ToDoListAppTests */;
+		};
 		AFADD80A2DC264AA00B4B913 /* Exceptions for "ToDoListApp" folder in "ToDoListApp" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -36,6 +45,7 @@
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				AFADD80A2DC264AA00B4B913 /* Exceptions for "ToDoListApp" folder in "ToDoListApp" target */,
+				AF4DD61C2DCBE59B0032269B /* Exceptions for "ToDoListApp" folder in "ToDoListAppTests" target */,
 			);
 			path = ToDoListApp;
 			sourceTree = "<group>";
@@ -68,6 +78,7 @@
 		AFADD7EF2DC264A800B4B913 = {
 			isa = PBXGroup;
 			children = (
+				AF0AAFDE2DCA78F100896E51 /* ToDoListApp.xctestplan */,
 				AFADD7FA2DC264A800B4B913 /* ToDoListApp */,
 				AFADD82B2DC6E14F00B4B913 /* ToDoListAppTests */,
 				AFADD7F92DC264A800B4B913 /* Products */,
