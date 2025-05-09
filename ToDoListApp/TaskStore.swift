@@ -70,15 +70,14 @@ final class TaskStore {
         save()
     }
     
-    /// Update an existing task’s title
     func update(_ task: Task, newTitle: String) {
-      // 1. Find the task’s index in the array
-      guard let idx = tasks.firstIndex(where: { $0.id == task.id }) else {
-        return
-      }
-      // 2. Mutate the title
-      tasks[idx].title = newTitle
-      // 3. Persist the change
-      save()
+        let trimmedTitle = newTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedTitle.isEmpty else {return}
+        
+        guard let idx = tasks.firstIndex(where: { $0.id == task.id }) else {return}
+        
+        tasks[idx].title = newTitle
+        
+        save()
     }
 }

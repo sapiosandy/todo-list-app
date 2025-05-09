@@ -115,6 +115,53 @@ final class ToDoListAppTests: XCTestCase {
         // Assert: task should be incomplete again
         XCTAssertFalse(store.tasks[0].isCompleted, "Task should be marked as not completed after toggling twice")
     }
+    
+    func testDeleteRemovesCorrectTask() {
+        let store = TaskStore.shared
+        store.tasks = [
+            Task (title: "Call Mom"),
+            Task (title: "Code for an hour"),
+            Task (title: "Read for 30 min")
+        ]
+        // Delete the second task (at index 1)
+        store.delete(at: IndexSet(integer: 1))
+        
+        //Assert the task count decreased
+        XCTAssertEqual(store.tasks.count, 2)
+        
+        //Assert "Second" is no longer in the list
+        let titles = store.tasks.map {$0.title}
+        XCTAssertFalse(titles.contains("Second"), "The task 'Second' should have been deleted")
+    }
+    
+    func testUpdateChangesTaskTitle() {
+        let store = TaskStore.shared
+        store.tasks = []
+        
+        //Arrange: Add a task
+        let task = Task(title: "Old Title")
+        store.add(task)
+        
+        // Act: Update the task's title
+        store.update(task, newTitle: "New Title")
+        
+        // Assert: The title should now be "New Title"
+        XCTAssertEqual(store.tasks[0].title, "New Title", "The task's title should be updated")
+    }
+    
+    func testUpdateWithEmptyTitleDoesNotChangeTask() {
+        let store = TaskStore.shared
+        store.tasks = []
+        
+        let task = Task(title: "Walk the dog")
+        store.add(task)
+        
+        //Try to update the task to an empty title
+        store.update(task, newTitle: "")
+        
+        // Check that the title did NOT change
+        XCTAssertEqual(store.tasks[0].title, "Walk the dog", "Task title should not be updated to an empty string")
+    }
 
 }
 
