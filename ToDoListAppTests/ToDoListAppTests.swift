@@ -86,6 +86,35 @@ final class ToDoListAppTests: XCTestCase {
 
         XCTAssertEqual(store.tasks.count, 1, "Task titles should be treated as duplicates regardless of case")
     }
+    
+    func testToggleCompletionChangesIsCompleted() {
+        let store = TaskStore.shared
+        store.tasks = []
+        
+        let task = Task(title: "Walk the dog", isCompleted: false)
+        store.add(task)
+        
+        //Act: toggle completion
+        store.toggleCompletion(of:task)
+        
+        // Assert: the task should now be completed
+        XCTAssertTrue(store.tasks[0].isCompleted, "Task should be marked as completed after toggle")
+    }
+    
+    func testToggleCompletionTwiceReturnsToOriginalState() {
+        let store = TaskStore.shared
+        store.tasks = []
+        
+        let task = Task(title: "Walk the dog", isCompleted: false)
+        store.add(task)
+        
+        //Act: toggle twice
+        store.toggleCompletion(of: task)
+        store.toggleCompletion(of: task)
+        
+        // Assert: task should be incomplete again
+        XCTAssertFalse(store.tasks[0].isCompleted, "Task should be marked as not completed after toggling twice")
+    }
 
 }
 

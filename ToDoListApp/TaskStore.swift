@@ -52,7 +52,9 @@ final class TaskStore {
         // Prevent duplicates (case-insensitive)
         guard !tasks.contains(where: { $0.title.lowercased() == trimmedTitle.lowercased() }) else { return }
 
-        tasks.append(Task(title: trimmedTitle))
+            // ✅ This is the new line you're adding in the same place
+            let cleanedTask = Task(id: task.id, title: trimmedTitle, isCompleted: task.isCompleted)
+            tasks.append(cleanedTask)
         save()
     }
 
