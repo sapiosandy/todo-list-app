@@ -36,8 +36,34 @@ final class TaskStore {
     }
     
     private func load() {
+        // Attempts to read the file at fileURL (your tasks.json).
+        // If the file doesnt exist or can't be read, we bail out early - leaving tasks as whatever it was (usually [])/
         guard let data = try? Data(contentsOf: fileURL) else {return}
+        // Tries to decode the raw JSON into a [Task].
+        // If decoding fails (malformed JSON, unexpected structure), the entire expression becomes nil, so the ?? [] provides an empty array instead. 
         tasks = (try? JSONDecoder().decode([Task].self, from: data)) ?? []
+        // Sort the tasks array so that:
+        // > Tasks with the earliest dueDate come first
+        // > Tasks without a dueDate come last
+        tasks.sort  {
+            switch ($0.dueDate, $1.dueDate) {
+                // 3a. Both tasks have a dueDate -> compare them directly
+            case let (d0?, d1?):
+                return d0 < d1
+                
+                // 3b. First task has a dueDate, second does not -> first comes before
+            case let (d0?, nil):
+                return true
+                
+                // 3c. First task has no dueDate, second does -> first comes after
+            case let (nil, d1?):
+                return false
+                
+                // 3d. Neither has a dueDate -> keep original order (return false)
+            default:
+                return false
+            }
+        }
     }
     
     private func save() {
@@ -65,7 +91,7 @@ final class TaskStore {
         save()
     }
     
-    func delete (at offsets: IndexSet) {
+    func delete(at offsets: IndexSet) {
         tasks.remove(atOffsets: offsets)
         save()
     }
