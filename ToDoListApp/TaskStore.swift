@@ -40,7 +40,7 @@ final class TaskStore {
         // If the file doesnt exist or can't be read, we bail out early - leaving tasks as whatever it was (usually [])/
         guard let data = try? Data(contentsOf: fileURL) else {return}
         // Tries to decode the raw JSON into a [Task].
-        // If decoding fails (malformed JSON, unexpected structure), the entire expression becomes nil, so the ?? [] provides an empty array instead. 
+        // If decoding fails (malformed JSON, unexpected structure), the entire expression becomes nil, so the ?? [] provides an empty array instead.
         tasks = (try? JSONDecoder().decode([Task].self, from: data)) ?? []
         // Sort the tasks array so that:
         // > Tasks with the earliest dueDate come first
@@ -48,15 +48,15 @@ final class TaskStore {
         tasks.sort  {
             switch ($0.dueDate, $1.dueDate) {
                 // 3a. Both tasks have a dueDate -> compare them directly
-            case let (d0?, d1?):
-                return d0 < d1
+            case let (firstDue?, secondDue?):
+                return firstDue < secondDue  // true if firstDue is earlier
                 
                 // 3b. First task has a dueDate, second does not -> first comes before
-            case let (d0?, nil):
+            case (_, nil):
                 return true
                 
                 // 3c. First task has no dueDate, second does -> first comes after
-            case let (nil, d1?):
+            case (nil,_ ):
                 return false
                 
                 // 3d. Neither has a dueDate -> keep original order (return false)
@@ -96,13 +96,14 @@ final class TaskStore {
         save()
     }
     
-    func update(_ task: Task, newTitle: String) {
+    func update(_ task: Task, newTitle: String, newDueDate: Date?) {
         let trimmedTitle = newTitle.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmedTitle.isEmpty else {return}
         
         guard let idx = tasks.firstIndex(where: { $0.id == task.id }) else {return}
         
         tasks[idx].title = newTitle
+        tasks[idx].dueDate = newDueDate
         
         save()
     }
